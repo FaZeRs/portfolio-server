@@ -6,9 +6,6 @@ services:
       context: ./api
       args:
         - APP_ENV=${API_ENV}
-    # command: npm run start:dev
-    # ports:
-    #   - "${API_PORT}:3000"
     volumes:
       - ./api:/usr/src/app
       - ./api/node_modules:/usr/src/app/node_modules/
@@ -53,13 +50,13 @@ services:
       - traefik.constraint-label=traefik-public
       - traefik.http.routers.api-http.rule=Host(`${API_DOMAIN?Variable not set}`)
       - traefik.http.routers.api-http.entrypoints=http
-      # - traefik.http.routers.api-http.middlewares=https-redirect
+      - traefik.http.routers.api-http.middlewares=https-redirect
       - traefik.http.routers.api-http.service=api
-      # - traefik.http.routers.api-https.rule=Host(`${API_DOMAIN?Variable not set}`)
-      # - traefik.http.routers.api-https.entrypoints=https
-      # - traefik.http.routers.api-https.tls=true
-      # - traefik.http.routers.api-https.tls.certresolver=le
-      # - traefik.http.routers.api-https.service=api
+      - traefik.http.routers.api-https.rule=Host(`${API_DOMAIN?Variable not set}`)
+      - traefik.http.routers.api-https.entrypoints=https
+      - traefik.http.routers.api-https.tls=true
+      - traefik.http.routers.api-https.tls.certresolver=le
+      - traefik.http.routers.api-https.service=api
       - traefik.http.services.api.loadbalancer.server.port=3000
 
   client:
@@ -90,13 +87,13 @@ services:
       - traefik.constraint-label=traefik-public
       - traefik.http.routers.client-http.rule=Host(`${CLIENT_DOMAIN?Variable not set}`)
       - traefik.http.routers.client-http.entrypoints=http
-      # - traefik.http.routers.client-http.middlewares=https-redirect
+      - traefik.http.routers.client-http.middlewares=https-redirect
       - traefik.http.routers.client-http.service=client
-      # - traefik.http.routers.client-https.rule=Host(`${CLIENT_DOMAIN?Variable not set}`)
-      # - traefik.http.routers.client-https.entrypoints=https
-      # - traefik.http.routers.client-https.tls=true
-      # - traefik.http.routers.client-https.tls.certresolver=le
-      # - traefik.http.routers.client-https.service=client
+      - traefik.http.routers.client-https.rule=Host(`${CLIENT_DOMAIN?Variable not set}`)
+      - traefik.http.routers.client-https.entrypoints=https
+      - traefik.http.routers.client-https.tls=true
+      - traefik.http.routers.client-https.tls.certresolver=le
+      - traefik.http.routers.client-https.service=client
       - traefik.http.services.client.loadbalancer.server.port=80
 
   mysqldb:
@@ -152,24 +149,24 @@ services:
       - traefik.constraint-label=traefik-public
       - traefik.http.routers.minio-console-http.rule=Host(`${MINIO_CONSOLE_DOMAIN?Variable not set}`)
       - traefik.http.routers.minio-console-http.entrypoints=http
-      # - traefik.http.routers.minio-console-http.middlewares=https-redirect
+      - traefik.http.routers.minio-console-http.middlewares=https-redirect
       - traefik.http.routers.minio-console-http.service=minio-console
-      # - traefik.http.routers.minio-console-https.rule=Host(`${MINIO_CONSOLE_DOMAIN?Variable not set}`)
-      # - traefik.http.routers.minio-console-https.entrypoints=https
-      # - traefik.http.routers.minio-console-https.tls=true
-      # - traefik.http.routers.minio-console-https.tls.certresolver=le
-      # - traefik.http.routers.minio-console-https.service=minio-console
+      - traefik.http.routers.minio-console-https.rule=Host(`${MINIO_CONSOLE_DOMAIN?Variable not set}`)
+      - traefik.http.routers.minio-console-https.entrypoints=https
+      - traefik.http.routers.minio-console-https.tls=true
+      - traefik.http.routers.minio-console-https.tls.certresolver=le
+      - traefik.http.routers.minio-console-https.service=minio-console
       - traefik.http.services.minio-console.loadbalancer.server.port=9001
 
       - traefik.http.routers.minio-http.rule=Host(`${MINIO_DOMAIN?Variable not set}`)
       - traefik.http.routers.minio-http.entrypoints=http
-      # - traefik.http.routers.minio-http.middlewares=https-redirect
+      - traefik.http.routers.minio-http.middlewares=https-redirect
       - traefik.http.routers.minio-http.service=minio
-      # - traefik.http.routers.minio-https.rule=Host(`${MINIO_DOMAIN?Variable not set}`)
-      # - traefik.http.routers.minio-https.entrypoints=https
-      # - traefik.http.routers.minio-https.tls=true
-      # - traefik.http.routers.minio-https.tls.certresolver=le
-      # - traefik.http.routers.minio-https.service=minio
+      - traefik.http.routers.minio-https.rule=Host(`${MINIO_DOMAIN?Variable not set}`)
+      - traefik.http.routers.minio-https.entrypoints=https
+      - traefik.http.routers.minio-https.tls=true
+      - traefik.http.routers.minio-https.tls.certresolver=le
+      - traefik.http.routers.minio-https.service=minio
       - traefik.http.services.minio.loadbalancer.server.port=9000
 
   reverse-proxy:
