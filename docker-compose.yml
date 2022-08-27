@@ -4,8 +4,6 @@ services:
   api:
     build:
       context: ./api
-      args:
-        - APP_ENV=${API_ENV}
     volumes:
       - ./api:/usr/src/app
       - ./api/node_modules:/usr/src/app/node_modules/
@@ -113,7 +111,7 @@ services:
       - backend
 
   redis:
-    image: 'redis:alpine'
+    image: redis:alpine
     restart: unless-stopped
     command: --requirepass ${REDIS_PASSWORD}
     ports:
@@ -171,7 +169,7 @@ services:
 
   reverse-proxy:
     # The official v2 Traefik docker image
-    image: traefik:v2.8
+    image: traefik:latest
     # Enables the web UI and tells Traefik to listen to docker
     command:
       # Enable Docker in Traefik, so that it reads labels from Docker services
