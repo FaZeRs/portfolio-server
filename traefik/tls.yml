@@ -1,0 +1,9 @@
+tls:
+  stores:
+    default:
+      defaultCertificate:
+        certFile: /etc/ssl/traefik/naurislinde.dev.pem
+        keyFile: /etc/ssl/traefik/naurislinde.dev.key
+  certificates:
+    - certFile: /etc/ssl/traefik/naurislinde.dev.pem
+      keyFile: /etc/ssl/traefik/naurislinde.dev.key
