@@ -8,7 +8,7 @@ services:
       - ./api:/usr/src/app
       - ./api/node_modules:/usr/src/app/node_modules/
     environment:
-      APP_ENV: ${API_ENV}
+      NODE_ENV: ${API_ENV}
       APP_PORT: ${API_PORT}
       DB_HOST: ${MYSQL_HOST}
       DB_PORT: ${MYSQL_PORT}
@@ -56,7 +56,7 @@ services:
     build:
       context: ./client
       args:
-        - APP_ENV=${CLIENT_ENV}
+        - NODE_ENV=${CLIENT_ENV}
         - BASE_URL=${CLIENT_DOMAIN}
         - APP_TITLE=${CLIENT_APP_TITLE}
         - APP_SHORT_NAME=${CLIENT_APP_SHORT_NAME}
