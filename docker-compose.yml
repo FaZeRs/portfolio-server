@@ -66,6 +66,7 @@ services:
         - LINKEDIN_URL=${CLIENT_LINKEDIN_URL}
         - EMAIL=${CLIENT_EMAIL}
         - API_URL=${CLIENT_API_URL}
+        - BASE_URL=${CLIENT_BASE_URL}
     volumes:
       - ./client:/usr/src/app
       - ./client/node_modules:/usr/src/app/node_modules/
