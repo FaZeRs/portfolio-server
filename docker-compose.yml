@@ -2,11 +2,7 @@ version: '3.8'
 
 services:
   api:
-    build:
-      context: ./api
-    volumes:
-      - ./api:/usr/src/app
-      - ./api/node_modules:/usr/src/app/node_modules/
+    image: sref/portfolio-api:latest
     environment:
       NODE_ENV: ${API_ENV}
       APP_PORT: ${API_PORT}
@@ -52,23 +48,7 @@ services:
       - traefik.http.services.api.loadbalancer.server.port=3000
 
   client:
-    build:
-      context: ./client
-      args:
-        - NODE_ENV=${CLIENT_ENV}
-        - BASE_URL=${CLIENT_DOMAIN}
-        - APP_TITLE=${CLIENT_APP_TITLE}
-        - APP_SHORT_NAME=${CLIENT_APP_SHORT_NAME}
-        - GITHUB_URL=${CLIENT_GITHUB_URL}
-        - FACEBOOK_URL=${CLIENT_FACEBOOK_URL}
-        - TWITTER_URL=${CLIENT_TWITTER_URL}
-        - LINKEDIN_URL=${CLIENT_LINKEDIN_URL}
-        - EMAIL=${CLIENT_EMAIL}
-        - API_URL=${CLIENT_API_URL}
-        - BASE_URL=${CLIENT_BASE_URL}
-    volumes:
-      - ./client:/usr/src/app
-      - ./client/node_modules:/usr/src/app/node_modules/
+    image: sref/portfolio-client:latest
     depends_on:
       - api
       - reverse-proxy
