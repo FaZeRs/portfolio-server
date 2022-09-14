@@ -46,6 +46,7 @@ services:
       - traefik.http.routers.api.service=api
       - traefik.http.routers.api.middlewares=https-redirect@file,www-to-non-www-redirect@file
       - traefik.http.services.api.loadbalancer.server.port=3000
+      - com.centurylinklabs.watchtower.enable=true
 
   client:
     image: sref/portfolio-client:latest
@@ -62,6 +63,7 @@ services:
       - traefik.http.routers.client.service=client
       - traefik.http.routers.client.middlewares=https-redirect@file,www-to-non-www-redirect@file
       - traefik.http.services.client.loadbalancer.server.port=80
+      - com.centurylinklabs.watchtower.enable=true
 
   mysqldb:
     image: mysql:latest
@@ -157,6 +159,17 @@ services:
       - traefik.http.routers.traefik-public.service=api@internal
       - traefik.http.routers.traefik-public.middlewares=admin-auth
       - traefik.http.services.traefik-public.loadbalancer.server.port=8080
+
+  watchtower:
+    image: containrrr/watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /etc/timezone:/etc/timezone:ro
+    environment:
+      - WATCHTOWER_CLEANUP=true
+      - WATCHTOWER_LABEL_ENABLE=true
+      - WATCHTOWER_INCLUDE_RESTARTING=true
+      - WATCHTOWER_POLL_INTERVAL=300
 
 volumes:
   node_modules:
