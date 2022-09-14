@@ -7,3 +7,15 @@ tls:
   certificates:
     - certFile: /etc/ssl/traefik/naurislinde.dev.pem
       keyFile: /etc/ssl/traefik/naurislinde.dev.key
+
+http:
+  middlewares:
+    https-redirect:
+      redirectScheme:
+        scheme: https
+        permanent: true
+    www-to-non-www-redirect:
+      redirectregex:
+        permanent: true
+        regex: "^https?://www\\.(.+)"
+        replacement: "https://${1}"
