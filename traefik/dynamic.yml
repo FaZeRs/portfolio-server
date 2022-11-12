@@ -19,3 +19,13 @@ http:
         permanent: true
         regex: "^https?://www\\.(.+)"
         replacement: "https://${1}"
+    cache-headers:
+      headers:
+        customResponseHeaders:
+          Cache-Control: "public, max-age=31536000"
+    traefik-compress:
+      compress: {}
+    secure-headers:
+      headers:
+        frameDeny: true
+        browserXssFilter: true
