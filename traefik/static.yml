@@ -1,10 +1,6 @@
 entryPoints:
   web:
     address: ":80"
-    http:
-      redirections:
-        entryPoint:
-          to: web-secure
   web-secure:
     address: ":443"
 
@@ -20,3 +16,12 @@ providers:
 api:
   dashboard: true
   insecure: true
+
+certificatesResolvers:
+  letsencrypt:
+    acme:
+      email: naurislinde@gmail.com
+      storage: /letsencrypt/acme.json
+      httpChallenge:
+        # used during the challenge
+        entryPoint: web
