@@ -1,8 +1,13 @@
+experimental:
+  http3: true
+
 entryPoints:
   web:
     address: ":80"
   web-secure:
     address: ":443"
+    http3:
+      advertisedPort: "443"
 
 providers:
   docker:
