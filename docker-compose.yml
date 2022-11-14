@@ -143,7 +143,8 @@ services:
       # Listen on port 80, default for HTTP, necessary to redirect to HTTPS
       - 80:80
       # Listen on port 443, default for HTTPS
-      - 443:443
+      - 443:443/tcp
+      - 443:443/udp
     volumes:
       # So that Traefik can listen to the Docker events
       - /var/run/docker.sock:/var/run/docker.sock:ro
